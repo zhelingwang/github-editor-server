@@ -1,0 +1,60 @@
+{
+  "name": "editor-server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node bin/www",
+    "start:prod": "pm2 start pm2.config.js",
+    "dev": "./node_modules/.bin/nodemon bin/www",
+    "prd": "pm2 start bin/www",
+    "sync:d2m": "cross-env NODE_ENV=development node ./src/scripts/sync-db2model.js",
+    "sync:m2d": "cross-env NODE_ENV=development node ./src/scripts/sync-model2db.js",
+    "lint": "npx eslint",
+    "lint/fix": "npx eslint --fix \"src/**/*.js\"",
+    "commitlint": "commitlint --edit",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "ioredis": "^5.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "koa-jwt": "^4.0.4",
+    "koa-logger": "^3.2.0",
+    "koa-onerror": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
+    "mongod": "^2.0.0",
+    "mongoose": "^8.3.4",
+    "mysql2": "^3.9.7",
+    "npmlog": "^7.0.1",
+    "pug": "^2.0.3",
+    "require-all": "^3.0.0",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/js": "^9.2.0",
+    "commander": "^12.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.2.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "globals": "^15.2.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "nodemon": "^1.19.1",
+    "prettier": "3.2.5",
+    "sequelize-auto": "^0.8.8"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint/fix"
+    ]
+  }
+}
