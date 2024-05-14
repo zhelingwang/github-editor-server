@@ -11,8 +11,7 @@
     "sync:m2d": "cross-env NODE_ENV=development node ./src/scripts/sync-model2db.js",
     "lint": "npx eslint",
     "lint/fix": "npx eslint --fix \"src/**/*.js\"",
-    "commitlint": "commitlint --edit",
-    "prepare": "husky"
+    "commitlint": "commitlint --edit"
   },
   "dependencies": {
     "debug": "^4.1.1",

@@ -3,6 +3,7 @@
 # github actions 中文文档 https://docs.github.com/cn/actions/getting-started-with-github-actions
 
 name: test
+run-name: ${{ github.actor }} is learning GitHub Actions
 
 on:
     push:
