@@ -5,26 +5,34 @@
 name: test
 run-name: ${{ github.actor }} is learning GitHub Actions
 
+# events 定义触发事件以及条件
 on:
     push:
         branches:
-            - master
+            - main
         paths:
             - '.github/workflows/**'
             - '__test__/**'
             - 'src/**'
+        # tags:
+        #     - v1.**
 
 jobs:
+# 第一个任务
     test:
+        # 虚拟机的系统
         runs-on: ubuntu-latest
-
         steps:
-            - uses: actions/checkout@v2
+        # 一个 - 就是一个step
+            # 第三方action: git pull repo code on virtual runner server
+            - uses: actions/checkout@v2 
+            # 第三方action: 安装nodejs
             - name: Use Node.js
               uses: actions/setup-node@v1
               with:
                   node-version: 14
             - name: lint and test
+            # 多行写法 | 开头
               run: |
                   npm i
                   npm run lint

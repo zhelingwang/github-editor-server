@@ -1,13 +1,22 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+name: test dev server
+run-name: ${{ github.actor }} start dev server
+
+on: 
+  push:
+    branches:
+      - main
+
 jobs:
-  check-bats-version:
+  startup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install -g bats
-      - run: bats -v
+      - name: install dependencies
+        run: npm install
+      - name: run eslint
+        run: npm run lint
+      - name: start server
+        run: npm run start
