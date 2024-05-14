@@ -23,11 +23,47 @@ github提供的CI/CD平台, 用于创建工作流程，当你执行 push 或 mer
 	- 构成workflow几个基本组件以及流程: events -> runner to run jobs -> several steps
 	- 上述流程都是多对一关系
 
+基本配置:
+```yaml
+# workflow display names
+name: test dev server
+run-name: ${{ github.actor }} start dev server
+
+# define trigger events
+on: 
+  push:
+    branches:
+      - main
+
+# define jobs and steps
+jobs:
+	# 第一个任务
+  startup:
+		# 安装虚拟机系统
+    runs-on: ubuntu-latest
+		# 一个 - 就是一个step
+    steps:
+			# 第三方action: git pull repo code on virtual runner server
+      - uses: actions/checkout@v4
+			# 第三方action: 安装nodejs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: install dependencies
+        run: npm install
+			# 省略 step name, 多行写法 | 开头
+      - run: |
+				npm run lint
+				npm run start
+```
+
+> docs: [Github Actions](https://docs.github.com/en/actions/quickstart)
+
+
 
 
 
 ## Docker
-
 
 
 
