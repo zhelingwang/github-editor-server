@@ -12,6 +12,7 @@ on:
             - 'src/**'
         # tags:
         #     - v1.**
+    workflow_dispatch:
 
 jobs:
 # 第一个任务
@@ -27,8 +28,9 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: 20
-            - name: lint
+            - name: lint and test
             # 多行写法 | 开头
               run: |
                   npm i
                   npm run lint
+                  npm run test

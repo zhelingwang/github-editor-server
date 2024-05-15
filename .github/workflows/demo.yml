@@ -1,10 +1,15 @@
 name: test dev server
 run-name: ${{ github.actor }} start dev server
 
-on: 
+on:
   push:
     branches:
-      - main
+      - dev
+  # 可在Github Actions页面手动触发该工作流
+  workflow_dispatch:
+  # 每次 MR/PR 合并时执行触发工作流
+  pull_request:
+    
 
 jobs:
   startup:

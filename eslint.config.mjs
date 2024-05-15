@@ -16,6 +16,7 @@ export default [
       globals: {
         ...globals.node,
         ...globals.commonjs,
+        ...globals.jest,
       },
     },
   },
