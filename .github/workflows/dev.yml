@@ -1,4 +1,4 @@
-name: test
+name: 自动化测试
 run-name: ${{ github.actor }} is learning GitHub Actions
 
 # events 定义触发事件以及条件

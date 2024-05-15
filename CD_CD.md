@@ -11,7 +11,7 @@ learn for using Github Actions
 
 
 ## Github Actions
-github提供的CI/CD平台, 用于创建工作流程，当你执行 push 或 merge 到 master 时自动执行构建, 测试或部署到生产环境.
+github提供的CI/CD平台工具, 创建工作流程，当你执行 push 或 merge 操作时自动执行任务, 如: 构建, 测试或部署
 
 划分两个workflows:
 1. test.yml: dev分支, 自动构建, 部署到测试机器
@@ -58,8 +58,6 @@ jobs:
 ```
 
 > docs: [Github Actions](https://docs.github.com/en/actions/quickstart)
-
-
 
 
 

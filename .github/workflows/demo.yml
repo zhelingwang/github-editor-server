@@ -1,4 +1,4 @@
-name: test dev server
+name: demo
 run-name: ${{ github.actor }} start dev server
 
 on:
