@@ -6,4 +6,6 @@ module.exports = {
       idle: 10000, // 如果一个线程 10 秒钟内没有被使用过的话，那么就释放线程
     },
   },
+  redisConf: {},
+  mongoConf: {},
 };

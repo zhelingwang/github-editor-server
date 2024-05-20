@@ -2,7 +2,7 @@ const { isProd } = require('../utils/env');
 
 const envName = isProd ? 'prod.js' : 'dev.js';
 const extraConf = require(`./env/${envName}`);
-const { mysqlConf } = extraConf;
+const { mysqlConf, mongoConf, redisConf } = extraConf;
 
 module.exports = {
   mysqlConf: {
@@ -21,9 +21,11 @@ module.exports = {
     pass: 'root',
     url: 'mongodb://lyon:root@localhost:27017',
     dbName: 'lyon-cli',
+    ...mongoConf,
   },
   redisConf: {
     port: 6379,
     host: '127.0.0.1',
+    ...redisConf,
   },
 };
