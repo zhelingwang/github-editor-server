@@ -128,8 +128,47 @@ Compose.yml文件中，每个定义的容器实际上可看作是一个单独的
 
 
 ## 自动部署到测试机
-- github actions 监听 git 提交, 触发执行自定义命令
-- docker 一键部署开发环境
-- 两者结合即可自动发布到测试环境
 
 ### 配置测试机
+- 购买一个便宜的云服务器, 如: 阿里云, 腾讯云, 华为云等
+- 创建 work 工作账号并为其添加sudo权限
+  - 日常操作不使用root权限用户, 因为权限过高
+```bash
+# root用户登录, 创建 work 账号
+adduser work 
+passwd work
+
+# sudo权限
+whereis sudoers # 找到文件位置 /etc/sudoers
+chmod u+w /etc/sudoers
+vim /etc/sudoers
+# 找到 `root  ALL=(ALL)   ALL`
+# 新增一行 `work  ALL=(ALL)   ALL`
+chmod u-w /etc/sudoers
+# 添加完成后使用work账号登录机器, 输入 su 后再输入 root 账号的密码就可获取超级权限
+```
+```txt
+su vs sudo
+作用: 为获得足够的执行权限, 以另一个用户(若未指定, 默认root)的身份来执行命令
+不同: 以切换到root用户为例
+  1. su 切换到root用户(因此需要输入root登录密码)并开启一个新shell会话, 适合频繁执行root权限命令的场景
+  2. sudo 不切换到目标用户(因此输入当前用户登录密码)不开启新shell会话, 适合单个命令执行的场景
+```
+- 登录信任: ssh
+  - 将公钥添加到测试机(ssh服务端) 的`.ssh/authorized_keys`
+- 安装必备软件
+  - git
+  - docker
+- 开放端口(重要)
+
+
+### 发布到测试机
+1. `github actions` 监听 `master` 分支 `push`
+2. 登录测试机, 拉取最新代码
+    - 在 `github/settings/secret `设置私钥和github登录密码
+    - 为虚拟机配置`ssh keys`后登录并更新代码
+3. 重新构建镜像 `docker-compose build editor-server`
+4. 重启所有容器 `docker-compose up -d`
+5. 删除 ssh key 和 github 登录密码
+
+[github actions 部署 deploy.yml](./.github/workflows/deploy.yml)
